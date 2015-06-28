@@ -1,0 +1,82 @@
+#!/opt/local/bin/python2
+
+
+####################################################
+#
+# Generate scrambled fonts.
+#
+# This is a very basic script to generate scrambled
+# fonts. Intentionally, only the lower case letters
+# are scrambled to provide an easy understanding of
+# the mechanism of font scrambling.
+#
+# Copyright (c) by Tamas Jursonovics
+# http://jursonovics.com
+#
+# prerequisites: fontforge, python-fontforge
+#
+####################################################
+
+
+import fontforge;                       #import fontforge python libraries
+import string
+import random
+import sys
+import os.path
+
+
+if len(sys.argv) == 1:                  #check arguments
+  print("Usage:")
+  exit()
+
+if len(sys.argv) > 1:                   #check input font file
+  if os.path.isfile(sys.argv[1]) == False:
+    print("Cannot find font file: " + sys.argv[1])
+    exit()
+else:
+  print("Usage:")
+
+if len(sys.argv) > 2 and sys.argv[2].isdigit():          #set or generate random number for font variant
+  variant=sys.argv[2]
+else:
+  variant=str(random.randrange(1000000000,9999999999))
+
+random.seed(variant)                    #for demo purposes only: allow recreation of scrambler table
+#random.seed()                          #uncomment this line, if you dont want to reveal your scrambler table by the font file name
+
+
+bfont=fontforge.open(sys.argv[1])       #open a non-scrambled, source font
+nfont=fontforge.font()                  #create an placeholder for the scrambled font
+tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
+
+displaychar="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!()+,-./:;<=>?"
+ascii=list(displaychar)                 #create scrambling table
+scrmx=list(displaychar)            
+random.shuffle(scrmx)                   #scramble the letters
+
+
+for b, n in zip(ascii, scrmx):          #scramble the font
+  bfont.selection.select(b)
+  bfont.copy()
+  nfont.selection.select(n)
+  nfont.paste()
+
+tbl.write(''.join(ascii) + "\n")        #write scrambler table
+tbl.write(''.join(scrmx))
+
+nfont.fontname=bfont.fontname           #copy properties
+nfont.familyname=bfont.familyname
+nfont.version=variant
+nfont.copyright=bfont.copyright
+nfont.ascent=bfont.ascent
+nfont.descent=bfont.descent
+nfont.em=bfont.em
+nfont.upos=bfont.upos
+nfont.uwidth=bfont.uwidth
+nfont.weight=bfont.weight
+nfont.comment="Scrambled font created by FontScrambler, please see the scrambling table to encode text"
+nfont.generate(bfont.familyname + "_" + variant + ".ttf")   #save scrambled font
+bfont.close()
+nfont.close()
+tbl.close()
+

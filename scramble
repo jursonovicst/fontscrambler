@@ -1,0 +1,54 @@
+#!/usr/bin/python
+
+
+####################################################
+#
+# Generate scrambled fonts.
+#
+# This is a very basic script to generate scrambled
+# fonts. Intentionally, only the lower case letters
+# are scrambled to provide an easy understanding of
+# the mechanism of font scrambling.
+#
+# Copyright (c) by Tamas Jursonovics
+# http://jursonovics.com
+#
+# prerequisites: fontforge, python-fontforge
+#
+####################################################
+
+
+import sys
+import os.path
+
+
+if len(sys.argv) == 1:                  #check arguments
+  print("Usage:")
+  exit()
+
+if len(sys.argv) > 1:                   #check input font file
+  if os.path.isfile(sys.argv[1]) == False:
+    print("Cannot find scrambler table: " + sys.argv[1])
+    exit()
+else:
+  print("Usage:")
+
+
+with open(sys.argv[1]) as f:
+  lines=f.readlines()
+
+f.close()
+
+ascii=lines[0][:-1]
+scrmx=lines[1]
+
+while True:
+  c = sys.stdin.read(1)
+  if not c:
+    break
+  idx=ascii.find(c)
+  if idx == -1:
+    sys.stdout.write(c)
+  else:
+    sys.stdout.write(scrmx[idx])
+
