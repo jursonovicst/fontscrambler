@@ -58,33 +58,28 @@ for b, n in zip(ascii, scrmx):          #scramble the font
   nfont.paste()
 
 
-if args.shake is not None:
-  for g in nfont.glyphs():
+if args.shake is not None:              #shake font
+  for g in nfont.glyphs():              #loop over all glyphs
 
-      for i in range(0, g.layer_cnt):
+      for i in range(0, g.layer_cnt):   #loop over all layers
       
         g.activeLayer=i
         l=g.layers[g.activeLayer]
 
-        print("Number of countours: ", len(l))
-        for c in l:
+        for c in l:                     #loop over all contours
 
-          print("Number of points in the countour: ",len(c))
-          for p in c:
+          for p in c:                   #loop over all points
 
-            print("x: ",p.x,"y: ",p.y)
-
-            d=0.05
+            d=0.05                      #5% shake factor
             p.x=p.x*random.uniform(1-d,1+d)
             p.y=p.y*random.uniform(1-d,1+d)
   
-            print("x: ",p.x,"y: ",p.y)
-
-        g.layers[g.activeLayer] = l
+        g.layers[g.activeLayer] = l     #save layer
 
 
 tbl.write(''.join(ascii) + "\n")        #write scrambler table
 tbl.write(''.join(scrmx))
+
 
 nfont.fontname=bfont.fontname           #copy properties
 nfont.familyname=bfont.familyname
