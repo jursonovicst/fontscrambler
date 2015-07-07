@@ -22,6 +22,7 @@ except ImportError:
   print("This scrypt requires fontforge's python library, please install python-fontforge!")
   exit(1)
 
+
 import fontforge
 import string
 import random
@@ -32,8 +33,8 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Font scrambler.')
 parser.add_argument('-i',type=argparse.FileType('r'),help='Input font file.',required=True)
-parser.add_argument('--seed',type=int,help='Only for testing purposes, allows recreation of the random table and stores the random seed in the filename.')
-parser.add_argument('--shake',action='store_true',help='Shake the points of glyphs to avoid from hash attack.')
+parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreation of the random table and stores the random seed in the filename.')
+parser.add_argument('--shake',type=float,help='Randomly move the points of glyphs by RATIO (float, typical value is 0.02) to avoid hash attack.',metavar='RATIO')
 args = parser.parse_args()
 
 
@@ -75,9 +76,8 @@ if args.shake is not None:              #shake font
 
           for p in c:                   #loop over all points
 
-            d=0.05                      #move points by 5% factor
-            p.x=p.x + g.width  * random.uniform(-d,d)
-            p.y=p.y + g.vwidth * random.uniform(-d,d)
+            p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by RATIO
+            p.y=p.y + g.vwidth * random.uniform(-args.shake,args.shake)
   
         l.removeOverlap()               #overlap may occurs after moving points randomly
         g.layers[g.activeLayer] = l     #save layer
