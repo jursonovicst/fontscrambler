@@ -47,7 +47,7 @@ else:
 
 
 bfont=fontforge.open(args.i.name)       #open a non-scrambled, source font
-nfont=fontforge.font()                  #create an placeholder for the scrambled font
+nfont=fontforge.font()                  #create a placeholder for the scrambled font
 tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
 
 
