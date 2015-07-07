@@ -58,7 +58,6 @@ random.shuffle(scrmx)                   #scramble the letters
 
 
 nfont.importLookups(bfont,bfont.gpos_lookups) #Copy GPOS Lookups before copying glyphs
-nfont.importLookups(bfont,bfont.gpos_lookups) #Copy GPOS Lookups before copying glyphs
 
 
 for b, n in zip(ascii, scrmx):          #scramble the font
