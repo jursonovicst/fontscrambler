@@ -34,7 +34,8 @@ import argparse
 parser = argparse.ArgumentParser(description='Font scrambler.')
 parser.add_argument('-i',type=argparse.FileType('r'),help='Input font file.',required=True)
 parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreation of the random table and stores the random seed in the filename.')
-parser.add_argument('--shake',type=float,help='Randomly move the points of glyphs by RATIO (float, typical value is 0.02) to avoid hash attack.',metavar='RATIO')
+parser.add_argument('--shake',type=float,help='Randomly move the points of glyphs by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
+parser.add_argument('--multiglyph',action='store_true',help='Assignes multiple glyphs to one character to avoid the frequency analysis attack. Currently under development')
 args = parser.parse_args()
 
 
