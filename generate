@@ -34,8 +34,9 @@ import argparse
 parser = argparse.ArgumentParser(description='Font scrambler.')
 parser.add_argument('-i',type=argparse.FileType('r'),help='Input TrueType font file.',metavar='FONTFILE',required=True)
 parser.add_argument('--scramble',action='store_true',default=False,help='Scramble (swap) the glyphs and create the scrambler table for text encoding.')
-parser.add_argument('--shake',type=float,help='Randomly move the points of all glyphs by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
+parser.add_argument('--shake',type=float,help='Randomly move the points of every glyph by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
 parser.add_argument('--multiglyph',action='store_true',help='Assigne multiple glyphs to one character to avoid the frequency analysis attack. Currently under development')
+parser.add_argument('--no-prediction',action='store_true',default=False,help='Change the number of points in every glyph to prevent prediction by components.')
 parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreating the scrambler table and stores the random seed in the filename.')
 args = parser.parse_args()
 
@@ -73,20 +74,22 @@ for b, n in zip(ascii, scrtbl):         #copy the glyphs (only in displaychar).
 if args.shake is not None:              #shake font
   for g in nfont.glyphs():              #loop over all glyphs
 
-      for i in range(0, g.layer_cnt):   #loop over all layers
+    for i in range(0, g.layer_cnt):     #loop over all layers
       
-        g.activeLayer=i
-        l=g.layers[g.activeLayer]
+      g.activeLayer=i
+      l=g.layers[g.activeLayer]
 
-        for c in l:                     #loop over all contours
-
-          for p in c:                   #loop over all points
-
-            p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by FACTOR
-            p.y=p.y + g.vwidth * random.uniform(-args.shake,args.shake)
+      for c in l:                       #loop over all contours
+        for p in c:                     #loop over all points
+          p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by FACTOR
+          p.y=p.y + g.vwidth * random.uniform(-args.shake,args.shake)
   
-        l.removeOverlap()               #overlap may occurs after moving points randomly
-        g.layers[g.activeLayer] = l     #save layer
+      l.removeOverlap()                 #overlap may occurs after moving points randomly
+      g.layers[g.activeLayer] = l       #save layer
+
+	
+	if args.no-prediction:
+	  g.simplify()                      #reduce the number of points in the glyph
 
 
 if args.scramble:
