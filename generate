@@ -86,11 +86,9 @@ if args.shake is not None:              #shake font
   
       l.removeOverlap()                 #overlap may occurs after moving points randomly
       g.layers[g.activeLayer] = l       #save layer
-
 	
-	if args.no-prediction:
+    if args.no-prediction:
 	  g.simplify()                      #reduce the number of points in the glyph
-
 
 if args.scramble:
   tbl.write(''.join(ascii) + "\n")      #write scrambler table
