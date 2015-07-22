@@ -32,10 +32,11 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description='Font scrambler.')
-parser.add_argument('-i',type=argparse.FileType('r'),help='Input font file.',required=True)
-parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreation of the random table and stores the random seed in the filename.')
-parser.add_argument('--shake',type=float,help='Randomly move the points of glyphs by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
-parser.add_argument('--multiglyph',action='store_true',help='Assignes multiple glyphs to one character to avoid the frequency analysis attack. Currently under development')
+parser.add_argument('-i',type=argparse.FileType('r'),help='Input TrueType font file.',metavar='FONTFILE',required=True)
+parser.add_argument('--scramble',action='store_true',default=False,help='Scramble (swap) the glyphs and create the scrambler table for text encoding.')
+parser.add_argument('--shake',type=float,help='Randomly move the points of all glyphs by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
+parser.add_argument('--multiglyph',action='store_true',help='Assigne multiple glyphs to one character to avoid the frequency analysis attack. Currently under development')
+parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreating the scrambler table and stores the random seed in the filename.')
 args = parser.parse_args()
 
 
@@ -43,25 +44,26 @@ if args.seed is not None:               #for demo purposes only: allow recreatio
   variant=str(args.seed)
   random.seed(variant)
 else:
-  variant=str(random.randrange(1000000000,9999999999))
   random.seed()
+  variant=str(random.randrange(1000000000,9999999999))
 
 
 bfont=fontforge.open(args.i.name)       #open a non-scrambled, source font
-nfont=fontforge.font()                  #create a placeholder for the scrambled font
-tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
-
+nfont=fontforge.font()                  #create a place holder for the new, modified font
+if args.scramble:
+  tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
 
 displaychar="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
-ascii=list(displaychar)                 #create scrambling table
-scrmx=list(displaychar)            
-random.shuffle(scrmx)                   #scramble the letters
+ascii=list(displaychar)
+scrtbl=list(displaychar)            
+if args.scramble:                       #scramble the glyphs
+  random.shuffle(scrtbl)                   
 
 
 nfont.importLookups(bfont,bfont.gpos_lookups) #Copy GPOS Lookups before copying glyphs
 
 
-for b, n in zip(ascii, scrmx):          #scramble the font
+for b, n in zip(ascii, scrtbl):         #copy the glyphs (only in displaychar).
   bfont.selection.select(b)
   bfont.copy()
   nfont.selection.select(n)
@@ -80,18 +82,19 @@ if args.shake is not None:              #shake font
 
           for p in c:                   #loop over all points
 
-            p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by RATIO
+            p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by FACTOR
             p.y=p.y + g.vwidth * random.uniform(-args.shake,args.shake)
   
         l.removeOverlap()               #overlap may occurs after moving points randomly
         g.layers[g.activeLayer] = l     #save layer
 
 
-tbl.write(''.join(ascii) + "\n")        #write scrambler table
-tbl.write(''.join(scrmx))
+if args.scramble:
+  tbl.write(''.join(ascii) + "\n")      #write scrambler table
+  tbl.write(''.join(scrtbl))
 
 
-nfont.fontname=bfont.fontname           #copy and set properties
+nfont.fontname=bfont.fontname           #copy or set properties
 nfont.gasp=bfont.gasp
 nfont.familyname=bfont.familyname
 nfont.version=variant
@@ -102,11 +105,12 @@ nfont.em=bfont.em
 nfont.upos=bfont.upos
 nfont.uwidth=bfont.uwidth
 nfont.weight=bfont.weight
-nfont.comment="Scrambled font created by FontScrambler, please see the scrambling table to encode text"
+nfont.comment="Scrambled font created by FontScrambler, please see the scrambler table to encode text"
 
 
 nfont.generate(bfont.familyname + "_" + variant + ".ttf")   #save scrambled font
 bfont.close()
 nfont.close()
-tbl.close()
+if args.scramble:
+  tbl.close()
 
