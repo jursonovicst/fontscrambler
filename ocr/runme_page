@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#parameters
+if [ $# -eq 1 ]; then
+  SEED=$1
+else
+  SEED=$RANDOM
+fi 
+
+FACTOR="0.05"
+DPI="300"
+
+
+#generate font
+../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
+if [ ! -f Andika_$SEED.ttf ]; then
+  echo "Error creating font!"
+  exit -1
+fi
+
+#generate test text
+rm -f lorem.txt
+./lorem.pl $SEED >lorem.txt
+if [ ! -f lorem.txt ]; then
+  echo "Error creating lorem ipsum text!"
+  exit -1
+fi
+
+#generate pdf
+rm -f sample.pdf
+xelatex sample.tex >/dev/null
+if [ ! -f sample.pdf ]; then
+  echo "Error creating pdf!"
+  exit -1
+fi
+
+
+###CRACKING starts###
+
+
+#time
+START=$(date +%s.%N)
+
+#create visual data
+rm -rf sample*.png
+convert -density $DPI sample.pdf sample.png
+
+#ocr
+>lorem-gocr.txt
+for f in ./sample*.png; do
+  #gocr
+  gocr $f >>lorem-gocr.txt
+done
+
+#time
+END=$(date +%s.%N)
+
+
+###Results###
+
+
+#stats
+echo -n "gocr at $FACTOR shaking, $DPI DPI, seed $SEED: "
+wdiff -s -1 -2 -3 lorem.txt lorem-gocr.txt |grep lorem-gocr.txt |cut -d' ' -f6 | tr -d '\n'
+echo -n " in "
+echo "$END - $START" |bc
+
