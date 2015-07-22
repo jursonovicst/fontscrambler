@@ -51,13 +51,13 @@ else:
 
 bfont=fontforge.open(args.i.name)       #open a non-scrambled, source font
 nfont=fontforge.font()                  #create a place holder for the new, modified font
-if not args.no-scramble:
+if not args.no_scramble:
   tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
 
 displaychar="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
 ascii=list(displaychar)
 scrtbl=list(displaychar)            
-if not args.no-scramble:                #scramble the glyphs
+if not args.no_scramble:                #scramble the glyphs
   random.shuffle(scrtbl)                   
 
 
@@ -90,7 +90,7 @@ if args.shake is not None:              #shake font
     if args.components:
 	  g.simplify()                      #reduce the number of points in the glyph
 
-if not args.no-scramble:
+if not args.no_scramble:
   tbl.write(''.join(ascii) + "\n")      #write scrambler table
   tbl.write(''.join(scrtbl))
 
@@ -112,6 +112,6 @@ nfont.comment="Scrambled font created by FontScrambler, please see the scrambler
 nfont.generate(bfont.familyname + "_" + variant + ".ttf")   #save scrambled font
 bfont.close()
 nfont.close()
-if not args.no-scramble:
+if not args.no_scramble:
   tbl.close()
 
