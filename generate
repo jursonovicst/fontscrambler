@@ -33,7 +33,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Font scrambler. Creates a scrambled TrueType font and a scrambler table for text encoding.')
 parser.add_argument('-i',type=argparse.FileType('r'),help='Input TrueType font file.',metavar='FONTFILE',required=True)
-parser.add_argument('--shake',type=float,help='Randomly move the points of every glyph by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
+parser.add_argument('--shake',type=float,default=0,help='Randomly move the points of every glyph by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
 parser.add_argument('--multiglyph',action='store_true',help='Assigne multiple glyphs to one character to avoid the frequency analysis attack. Currently under development')
 parser.add_argument('--components',action='store_true',default=False,help='Change the number of points in every glyph to prevent prediction by components.')
 parser.add_argument('--no-scramble',action='store_true',default=False,help='Do not scramble (swap) the glyphs. Only for testing purposes, allows testing individual features.')
@@ -52,7 +52,7 @@ else:
 bfont=fontforge.open(args.i.name)       #open a non-scrambled, source font
 nfont=fontforge.font()                  #create a place holder for the new, modified font
 if not args.no_scramble:
-  tbl=open(bfont.familyname + "_" + variant + ".txt", 'w') #create the scrambler table
+  tbl=open(bfont.familyname + "-" + str(args.shake) + "-" + variant + ".txt", 'w') #create the scrambler table
 
 displaychar="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
 ascii=list(displaychar)
@@ -88,7 +88,7 @@ if args.shake is not None:              #shake font
       g.layers[g.activeLayer] = l       #save layer
 	
     if args.components:
-	  g.simplify()                      #reduce the number of points in the glyph
+	  g.simplify()                  #reduce the number of points in the glyph
 
 if not args.no_scramble:
   tbl.write(''.join(ascii) + "\n")      #write scrambler table
@@ -109,7 +109,7 @@ nfont.weight=bfont.weight
 nfont.comment="Scrambled font created by FontScrambler, please see the scrambler table to encode text"
 
 
-nfont.generate(bfont.familyname + "_" + variant + ".ttf")   #save scrambled font
+nfont.generate(bfont.familyname + "-" + str(args.shake) + "-" + variant + ".ttf")   #save scrambled font
 bfont.close()
 nfont.close()
 if not args.no_scramble:
