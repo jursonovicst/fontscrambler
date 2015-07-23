@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#test several combination
+
+
+for FACTOR in $(seq 0.00 0.01 0.1); do
+  for n in {1..20}; do
+    ./runme_ascii $FACTOR
+  done
+done
+
+
