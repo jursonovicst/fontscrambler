@@ -1,35 +1,48 @@
 #!/bin/bash
 
 #parameters
+#runme_ascii [FACTOR [DPI [SEED]]]
 if [ $# -eq 1 ]; then
-  SEED=$1
+  FACTOR=$1
+  DPI="300"
+  SEED=$RANDOM
+elif [ $# -eq 2 ]; then
+  FACTOR=$1
+  DPI=$2
+  SEED=$RANDOM
+elif [ $# -eq 3 ]; then
+  FACTOR=$1
+  DPI=$2
+  SEED=$3
 else
+  FACTOR="0.01"
+  DPI="300"
   SEED=$RANDOM
 fi 
 
-FACTOR="0.01"
-DPI="300"
+TAG="$FACTOR-$DPI-$SEED"
 
 
 #generate font
 ../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
-if [ ! -f Andika_$SEED.ttf ]; then
+if [ ! -f Andika-$FACTOR-$SEED.ttf ]; then
   echo "Error creating font!"
   exit -1
 fi
 
 #generate test text
-echo "0123456789" >lorem.txt
-echo "abcdefghij" >>lorem.txt
-echo "klmnopqrst" >>lorem.txt
-echo "uvwxyzABCD" >>lorem.txt
-echo "EFGHIJKLMN" >>lorem.txt
-echo "OPQRSTUVWX" >>lorem.txt
-echo "YZ." >>lorem.txt
+echo "0 1 2 3 4 5 6 7 8 9" >lorem.txt
+echo "a b c d e f g h i j" >>lorem.txt
+echo "k l m n o p q r s t" >>lorem.txt
+echo "u v w x y z A B C D" >>lorem.txt
+echo "E F G H I J K L M N" >>lorem.txt
+echo "O P Q R S T U V W X" >>lorem.txt
+echo "Y Z ." >>lorem.txt
 
 #generate pdf
 rm -f ascii.pdf
-xelatex ascii.tex >/dev/null
+sed "s/Andika-R/Andika-$FACTOR-$SEED/" ascii.tex >/tmp/ascii.tex
+xelatex /tmp/ascii.tex >/dev/null
 if [ ! -f ascii.pdf ]; then
   echo "Error creating pdf!"
   exit -1
@@ -44,12 +57,12 @@ START=$(date +%s.%N)
 
 #create visual data
 rm -f ascii.png
-convert -density $DPI ascii.pdf ascii.png
+convert -density $DPI ascii.pdf ascii-$FACTOR-$SEED.png
 
 #ocr
->lorem-gocr.txt
+>lorem-$FACTOR-$SEED.txt
 #gocr
-gocr ascii.png >>lorem-gocr.txt
+gocr ascii-$FACTOR-$SEED.png >>lorem-$FACTOR-$SEED.txt
 
 #time
 END=$(date +%s.%N)
@@ -58,9 +71,13 @@ END=$(date +%s.%N)
 ###Results###
 
 
+#adjust
+sed -i 's/ //g' lorem-$FACTOR-$SEED.txt
+sed -i 's/\(.\)/\1 /g' lorem-$FACTOR-$SEED.txt
+
 #stats
 echo -n "gocr at $FACTOR shaking, $DPI DPI, seed $SEED: "
-wdiff -s -1 -2 -3 lorem.txt lorem-gocr.txt |grep lorem-gocr.txt |cut -d' ' -f6 | tr -d '\n'
+wdiff -s -1 -2 -3 lorem.txt lorem-$FACTOR-$SEED.txt |grep lorem-$FACTOR-$SEED.txt |cut -d' ' -f6 | tr -d '\n'
 echo -n " in "
 echo "$END - $START" |bc
 
