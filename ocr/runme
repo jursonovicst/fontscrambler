@@ -1,18 +1,32 @@
 #!/bin/bash
 
+OUT="output.csv"
 #test several combination
 rm -f lorem-*
 rm -f ascii-*
 rm -f Andika-*
+rm $OUT
+
+echo "#FACTOR,DPI,SEED,SUCCESS,TIME" |tee -a $OUT
 
 for DPI in $(seq 200 100 600); do
   for FACTOR in $(seq 0.01 0.01 0.1); do
-    echo "$DPI $FACTOR"
+#    echo "$DPI $FACTOR"
+    X=""
     for n in {1..20}; do
-      ./runme_ascii $FACTOR $DPI
+      X="$(./runme_ascii $FACTOR $DPI)
+$X"
     done
-    echo ""
+    echo "${X::-1}" |tee -a $OUT
+    echo "${X::-1}" |awk -F',' '{n+=1;sum+=$4;array[n]=$4} END {for (x=1;x<n;x++) sumsq+=(array[x]-(sum/n))**2; print ",,,," sum/n "," sqrt(sumsq/n)}' |tee -a $OUT
+
+#    echo ""
+#    echo ""
   done
 done
+
+
+
+#awk '{n++; sum+=$1; sumsq+=$1*$1}END{print sum/n "," sqrt(sumsq/NR - (sum/NR)**2)}'
 
 

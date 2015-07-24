@@ -76,8 +76,8 @@ sed -i 's/ //g' lorem-$FACTOR-$DPI-$SEED.txt
 sed -i 's/\(.\)/\1 /g' lorem-$FACTOR-$DPI-$SEED.txt
 
 #stats
-echo -n "gocr at $FACTOR shaking, $DPI DPI, seed $SEED: "
+echo -n "$FACTOR,$DPI,$SEED,"
 wdiff -s -1 -2 -3 lorem.txt lorem-$FACTOR-$DPI-$SEED.txt |grep lorem-$FACTOR-$DPI-$SEED.txt |cut -d' ' -f6 |cut -d "%" -f1 |tr -d '\n'
-echo -n " % in "
+echo -n ","
 echo "$END - $START" |bc
 
