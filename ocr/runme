@@ -10,7 +10,7 @@ rm -f $OUT
 echo "#FACTOR,DPI,SEED,SUCCESS,TIME" |tee -a $OUT
 
 for DPI in $(seq 200 100 600); do
-  for FACTOR in $(seq 0.01 0.01 0.1); do
+  for FACTOR in $(seq 0.01 0.01 0.09); do
 #    echo "$DPI $FACTOR"
     X=""
     for n in {1..20}; do
