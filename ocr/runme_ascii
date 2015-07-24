@@ -25,7 +25,7 @@ TAG="$FACTOR-$DPI-$SEED"
 
 #generate font
 ../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
-if [ ! -f Andika-$FACTOR-$SEED.ttf ]; then
+if [ ! -f Andika-$FACTOR-$DPI-$SEED.ttf ]; then
   echo "Error creating font!"
   exit -1
 fi
@@ -41,7 +41,7 @@ echo "Y Z ." >>lorem.txt
 
 #generate pdf
 rm -f ascii.pdf
-sed "s/Andika-R/Andika-$FACTOR-$SEED/" ascii.tex >/tmp/ascii.tex
+sed "s/Andika-R/Andika-$FACTOR-$DPI-$SEED/" ascii.tex >/tmp/ascii.tex
 xelatex /tmp/ascii.tex >/dev/null
 if [ ! -f ascii.pdf ]; then
   echo "Error creating pdf!"
@@ -57,12 +57,12 @@ START=$(date +%s.%N)
 
 #create visual data
 rm -f ascii.png
-convert -density $DPI ascii.pdf ascii-$FACTOR-$SEED.png
+convert -density $DPI ascii.pdf ascii-$FACTOR-$DPI-$SEED.png
 
 #ocr
->lorem-$FACTOR-$SEED.txt
+>lorem-$FACTOR-$DPI-$SEED.txt
 #gocr
-gocr ascii-$FACTOR-$SEED.png >>lorem-$FACTOR-$SEED.txt
+gocr ascii-$FACTOR-$SEED.png >>lorem-$FACTOR-$DPI-$SEED.txt
 
 #time
 END=$(date +%s.%N)
