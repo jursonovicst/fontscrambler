@@ -25,7 +25,7 @@ TAG="$FACTOR-$DPI-$SEED"
 
 #generate font
 ../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
-if [ ! -f Andika-$FACTOR-$DPI-$SEED.ttf ]; then
+if [ ! -f Andika-$FACTOR-$SEED.ttf ]; then
   echo "Error creating font!"
   exit -1
 fi
@@ -41,7 +41,7 @@ echo "Y Z ." >>lorem.txt
 
 #generate pdf
 rm -f ascii.pdf
-sed "s/Andika-R/Andika-$FACTOR-$DPI-$SEED/" ascii.tex >/tmp/ascii.tex
+sed "s/Andika-R/Andika-$FACTOR-$SEED/" ascii.tex >/tmp/ascii.tex
 xelatex /tmp/ascii.tex >/dev/null
 if [ ! -f ascii.pdf ]; then
   echo "Error creating pdf!"
@@ -62,7 +62,7 @@ convert -density $DPI ascii.pdf ascii-$FACTOR-$DPI-$SEED.png
 #ocr
 >lorem-$FACTOR-$DPI-$SEED.txt
 #gocr
-gocr ascii-$FACTOR-$SEED.png >>lorem-$FACTOR-$DPI-$SEED.txt
+gocr ascii-$FACTOR-$DPI-$SEED.png >>lorem-$FACTOR-$DPI-$SEED.txt
 
 #time
 END=$(date +%s.%N)
@@ -72,12 +72,12 @@ END=$(date +%s.%N)
 
 
 #adjust
-sed -i 's/ //g' lorem-$FACTOR-$SEED.txt
-sed -i 's/\(.\)/\1 /g' lorem-$FACTOR-$SEED.txt
+sed -i 's/ //g' lorem-$FACTOR-$DPI-$SEED.txt
+sed -i 's/\(.\)/\1 /g' lorem-$FACTOR-$DPI-$SEED.txt
 
 #stats
 echo -n "gocr at $FACTOR shaking, $DPI DPI, seed $SEED: "
-wdiff -s -1 -2 -3 lorem.txt lorem-$FACTOR-$SEED.txt |grep lorem-$FACTOR-$SEED.txt |cut -d' ' -f6 | tr -d '\n'
-echo -n " in "
+wdiff -s -1 -2 -3 lorem.txt lorem-$FACTOR-$DPI-$SEED.txt |grep lorem-$FACTOR-$DPI-$SEED.txt |cut -d' ' -f6 |cut -d "%" -f1 |tr -d '\n'
+echo -n " % in "
 echo "$END - $START" |bc
 

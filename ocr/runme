@@ -1,12 +1,17 @@
 #!/bin/bash
 
 #test several combination
+rm -f lorem-*
+rm -f ascii-*
+rm -f Andika-*
 
 for DPI in $(seq 200 100 600); do
-  for FACTOR in $(seq 0.00 0.01 0.1); do
+  for FACTOR in $(seq 0.01 0.01 0.1); do
+    echo "$DPI $FACTOR"
     for n in {1..20}; do
       ./runme_ascii $FACTOR $DPI
     done
+    echo ""
   done
 done
 
