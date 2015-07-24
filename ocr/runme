@@ -5,7 +5,7 @@ OUT="output.csv"
 rm -f lorem-*
 rm -f ascii-*
 rm -f Andika-*
-rm $OUT
+rm -f $OUT
 
 echo "#FACTOR,DPI,SEED,SUCCESS,TIME" |tee -a $OUT
 
@@ -18,7 +18,7 @@ for DPI in $(seq 200 100 600); do
 $X"
     done
     echo "${X::-1}" |tee -a $OUT
-    echo "${X::-1}" |awk -F',' '{n+=1;sum+=$4;array[n]=$4} END {for (x=1;x<n;x++) sumsq+=(array[x]-(sum/n))**2; print ",,,," sum/n "," sqrt(sumsq/n)}' |tee -a $OUT
+    echo "${X::-1}" |awk -F',' -v factor=$FACTOR -v dpi=$DPI '{n+=1;sum+=$4;array[n]=$4} END {for (x=1;x<n;x++) sumsq+=(array[x]-(sum/n))**2; print factor "," dpi ",,," sum/n "," sqrt(sumsq/n)}' |tee -a $OUT
 
 #    echo ""
 #    echo ""
