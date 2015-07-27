@@ -31,13 +31,13 @@ if [ ! -f Andika-$FACTOR-$SEED.ttf ]; then
 fi
 
 #generate test text
-echo "0 1 2 3 4 5 6 7 8 9" >lorem.txt
-echo "a b c d e f g h i j" >>lorem.txt
-echo "k l m n o p q r s t" >>lorem.txt
-echo "u v w x y z A B C D" >>lorem.txt
-echo "E F G H I J K L M N" >>lorem.txt
-echo "O P Q R S T U V W X" >>lorem.txt
-echo "Y Z ." >>lorem.txt
+echo "0 1 2 3 4 5 6 7 8 9" >alphabet.txt
+echo "a b c d e f g h i j" >>alphabet.txt
+echo "k l m n o p q r s t" >>alphabet.txt
+echo "u v w x y z A B C D" >>alphabet.txt
+echo "E F G H I J K L M N" >>alphabet.txt
+echo "O P Q R S T U V W X" >>alphabet.txt
+echo "Y Z ." >>alphabet.txt
 
 #generate pdf
 rm -f ascii.pdf
@@ -60,9 +60,9 @@ rm -f ascii.png
 convert -density $DPI ascii.pdf ascii-$FACTOR-$DPI-$SEED.png
 
 #ocr
->lorem-$FACTOR-$DPI-$SEED.txt
+>alphabet-$FACTOR-$DPI-$SEED.txt
 #gocr
-gocr ascii-$FACTOR-$DPI-$SEED.png >>lorem-$FACTOR-$DPI-$SEED.txt
+gocr ascii-$FACTOR-$DPI-$SEED.png >>alphabet-$FACTOR-$DPI-$SEED.txt
 
 #time
 END=$(date +%s.%N)
@@ -72,12 +72,12 @@ END=$(date +%s.%N)
 
 
 #adjust
-sed -i 's/ //g' lorem-$FACTOR-$DPI-$SEED.txt
-sed -i 's/\(.\)/\1 /g' lorem-$FACTOR-$DPI-$SEED.txt
+sed -i 's/ //g' alphabet-$FACTOR-$DPI-$SEED.txt
+sed -i 's/\(.\)/\1 /g' alphabet-$FACTOR-$DPI-$SEED.txt
 
 #stats
 echo -n "$FACTOR,$DPI,$SEED,"
-wdiff -s -1 -2 -3 lorem.txt lorem-$FACTOR-$DPI-$SEED.txt |grep lorem-$FACTOR-$DPI-$SEED.txt |cut -d' ' -f6 |cut -d "%" -f1 |tr -d '\n'
+wdiff -s -1 -2 -3 alphabet.txt alphabet-$FACTOR-$DPI-$SEED.txt |grep alphabet-$FACTOR-$DPI-$SEED.txt |cut -d' ' -f6 |cut -d "%" -f1 |tr -d '\n'
 echo -n ","
 echo "$END - $START" |bc
 
