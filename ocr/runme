@@ -2,7 +2,7 @@
 
 OUT="output.csv"
 #test several combination
-rm -f lorem-*
+rm -f alphabet-*
 rm -f ascii-*
 rm -f Andika-*
 rm -f $OUT
@@ -10,7 +10,7 @@ rm -f $OUT
 echo "#FACTOR,DPI,SEED,SUCCESS,TIME,FACTOR,DPI,mean(SUCCESS),std.dev(SUCCESS),std.err(SUCCESS),mean(TIME),std.dev(TIME),std.err(TIME)" |tee -a $OUT
 
 for DPI in $(seq 200 100 600); do
-  echo "$DPI"
+  echo "$DPI" |tee -a $OUT
   for FACTOR in $(seq 0.01 0.01 0.09); do
     X=""
     for n in {1..20}; do
@@ -21,8 +21,8 @@ $X"
     echo "${X::-1}" |awk -F',' -v factor=$FACTOR -v dpi=$DPI '{n+=1;sum_s+=$4;sum_t+=$5;array_s[n]=$4;array_t[n]=$5} END {for (x=1;x<n;x++) sumsq_s+=(array_s[x]-(sum_s/n))**2; for (x=1;x<n;x++) sumsq_t+=(array_t[x]-(sum_t/n))**2; print ",,,,," factor "," dpi "," sum_s/n "," sqrt(sumsq_s/(n-1)) "," sqrt(sumsq_s/(n-1))/sqrt(n) "," sum_t/n "," sqrt(sumsq_t/(n-1)) "," sqrt(sumsq_t/(n-1))/sqrt(n)}' |tee -a $OUT
 
   done
-  echo ""
-  echo ""
+  echo "" |tee -a $OUT
+  echo "" |tee -a $OUT
 done
 
 
