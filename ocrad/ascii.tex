@@ -1,0 +1,31 @@
+%!TEX program = xelatex
+
+\documentclass{article}[10pt]
+\usepackage{fontspec}
+\usepackage{lipsum}
+
+\newfontfamily\ScrambledFont[
+  Path = ./,
+  UprightFont = Andika-R,
+  ItalicFont = Andika-R,
+  BoldFont = Andika-R,
+  BoldItalicFont = Andika-R
+]{Andika-R}
+
+\begin{document}
+\pagenumbering{gobble}
+\ScrambledFont{%
+0123456789
+
+abcdefghij
+
+klmnopqrst
+
+uvwxyzABCD
+
+EFGHIJKLMN
+
+OPQRSTUVWX
+
+YZ.}
+\end{document}
