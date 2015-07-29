@@ -1,0 +1,20 @@
+%!TEX program = xelatex
+
+\documentclass{article}[10pt]
+\usepackage{fontspec}
+\usepackage{lipsum}
+
+\newfontfamily\ScrambledFont[
+  Path = ./,
+  UprightFont = Andika_10,
+  ItalicFont = Andika_10,
+  BoldFont = Andika_10,
+  BoldItalicFont = Andika_10
+]{Andika_10}
+
+\begin{document}
+\pagenumbering{gobble}
+\ScrambledFont{
+  \input{lorem.txt}
+}
+\end{document}
