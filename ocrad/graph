@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
-set terminal postscript eps size 3.2,2.5 enhanced
-set output 'success.eps'
+set terminal postscript eps size 3.2,2 enhanced
+set output 'success_ocrad.eps'
 #set terminal png size 500,500
 #set output 'success.png'
 set datafile separator ","
@@ -11,7 +11,7 @@ set ylabel "OCR success rate (%)"
 plot for [IDX=0:5] 'output.csv' i IDX u 6:8    w linespoint ti columnhead, \
      for [IDX=0:5] ''           i IDX u 6:8:11 w yerrorbars pt 0 ti ''
 
-set output 'time.eps'
+set output 'time_ocrad.eps'
 set ylabel "OCR time (s)
 plot for [IDX=0:5] 'output.csv' i IDX u 6:9    w linespoint ti columnhead, \
      for [IDX=0:5] ''           i IDX u 6:9:13 w yerrorbars pt 0 ti ''
