@@ -63,10 +63,8 @@ else:
 
 ascii=list(displaychar)
 scrtbl=list(codechar)            
-print(ascii)
 if not args.no_scramble:                #scramble the glyphs
   random.shuffle(scrtbl)                   
-print(scrtbl)
 
 
 nfont.importLookups(bfont,bfont.gpos_lookups) #Copy GPOS Lookups before copying glyphs
