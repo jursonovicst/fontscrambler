@@ -7,11 +7,13 @@ set output 'success_ocrad.eps'
 set datafile separator ","
 set xlabel "shaking factor"
 set ylabel "OCR success rate (%)"
+set yrange [0:100]
 
 plot for [IDX=0:5] 'output.csv' i IDX u 6:8    w linespoint ti columnhead, \
      for [IDX=0:5] ''           i IDX u 6:8:11 w yerrorbars pt 0 ti ''
 
 set output 'time_ocrad.eps'
 set ylabel "OCR time (s)
+set yrange [0:10]
 plot for [IDX=0:5] 'output.csv' i IDX u 6:9    w linespoint ti columnhead, \
      for [IDX=0:5] ''           i IDX u 6:9:13 w yerrorbars pt 0 ti ''
