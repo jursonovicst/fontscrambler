@@ -34,7 +34,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Font scrambler. Creates a scrambled TrueType font and a scrambler table for text encoding.')
 parser.add_argument('-i',type=argparse.FileType('r'),help='Input TrueType font file.',metavar='FONTFILE',required=True)
 parser.add_argument('--shake',type=float,default=0,help='Randomly move the points of every glyph by FACTOR (float, typical value is 0.02) to avoid hash attack.',metavar='FACTOR')
-parser.add_argument('--multiglyph',action='store_true',help='Assigne multiple glyphs to one character to avoid the frequency analysis attack.')
+parser.add_argument('--multiglyph',action='store_true',default=False,help='Assigne multiple glyphs to one character to avoid the frequency analysis attack.')
 parser.add_argument('--components',action='store_true',default=False,help='Change the number of points in every glyph to prevent prediction by components.')
 parser.add_argument('--no-scramble',action='store_true',default=False,help='Do not scramble (swap) the glyphs. Only for testing purposes, allows testing individual features.')
 parser.add_argument('--seed',type=int,help='Set the random seed to SEED (integer). Only for testing purposes, allows recreating the scrambler table and stores the random seed in the filename.')
