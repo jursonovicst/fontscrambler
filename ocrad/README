@@ -1,6 +1,6 @@
 This directory contains a small script to test the computing resource needs of optical character recognition.
 
-OCR used: gocra (http://jocr.sourceforge.net/)
+OCR used: ocrad (http://www.gnu.org/software/ocrad/)
 
 runme        - Performe several measurements with different shaking factor and DPI, the report the statistics.
 runme_ascii  - Performe only one measurement with a specific shaking factor and DPI.
