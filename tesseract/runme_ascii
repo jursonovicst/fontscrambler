@@ -20,8 +20,6 @@ else
   SEED=$RANDOM
 fi 
 
-TAG="$FACTOR-$DPI-$SEED"
-
 
 #generate font
 ../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
@@ -39,29 +37,20 @@ echo "E F G H I J K L M N" >>alphabet.txt
 echo "O P Q R S T U V W X" >>alphabet.txt
 echo "Y Z ." >>alphabet.txt
 
-#generate pdf
-rm -f ascii.pdf
-sed "s/Andika-R/Andika-$FACTOR-$SEED/" ascii.tex >/tmp/ascii.tex
-xelatex /tmp/ascii.tex >/dev/null
-if [ ! -f ascii.pdf ]; then
-  echo "Error creating pdf!"
-  exit -1
-fi
-
 
 ###CRACKING starts###
 
+rm -f alphabet.png
 
 #time
 START=$(date +%s.%N)
 
 #create visual data
-rm -f ascii.png
-convert -density $DPI ascii.pdf ascii-$FACTOR-$DPI-$SEED.png
+convert -density $DPI -font ./Andika-$FACTOR-$SEED.ttf alphabet.txt alphabet-$FACTOR-$DPI-$SEED.png
 
 #ocr
-#ocr
-tesseract ascii-$FACTOR-$DPI-$SEED.png alphabet-$FACTOR-$DPI-$SEED 1>/dev/null 2>&1
+#tesseract
+tesseract alphabet-$FACTOR-$DPI-$SEED.png alphabet-$FACTOR-$DPI-$SEED 1>/dev/null 2>&1
 
 #time
 END=$(date +%s.%N)
