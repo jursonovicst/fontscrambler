@@ -80,33 +80,25 @@ for b, n in zip(ascii, scrtbl):         #copy the glyphs (only in displaychar).
   nfont.selection.select(('unicode',), ord(n))
   nfont.paste()
 
-print("2")
 if args.shake is not None:              #shake font
   for g in nfont.glyphs():              #loop over all glyphs
-    print("2.1")
 
     for i in range(0, g.layer_cnt):     #loop over all layers
-      print("2. 2")
       
       g.activeLayer=i
       l=g.layers[g.activeLayer]
 
       for c in l:                       #loop over all contours
-        print("2.  3")
         for p in c:                     #loop over all points
-          print("2.   4")
           p.x=p.x + g.width  * random.uniform(-args.shake,args.shake)  #move points by FACTOR
           p.y=p.y + g.vwidth * random.uniform(-args.shake,args.shake)
   
-      print("2.5")
       l.removeOverlap()                 #overlap may occurs after moving points randomly
-      print("2.6")
       g.layers[g.activeLayer] = l       #save layer
-      print("2.7")
 	
     if args.components:
 	  g.simplify()                  #reduce the number of points in the glyph
-print("3")
+
 if not args.no_scramble:
   buff = ''.join(ascii)+ "\n"
   tbl.write(buff.encode('UTF-8'))      #write scrambler table
@@ -114,7 +106,6 @@ if not args.no_scramble:
   tbl.write(buff.encode('UTF-8'))
 
 
-print("4")
 nfont.fontname=bfont.fontname           #copy or set properties
 nfont.gasp=bfont.gasp
 nfont.familyname=bfont.familyname
