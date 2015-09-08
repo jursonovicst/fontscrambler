@@ -40,7 +40,7 @@ echo "Y Z ." >>alphabet.txt
 
 ###CRACKING starts###
 
-rm -f alphabet.png
+rm -f alphabet-$FACTOR-$DPI-$SEED.png
 
 #time
 START=$(date +%s.%N)

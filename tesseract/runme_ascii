@@ -40,7 +40,7 @@ echo "Y Z ." >>alphabet.txt
 
 ###CRACKING starts###
 
-rm -f alphabet.png
+rm -f alphabet-$FACTOR-$DPI-$SEED.png
 
 #time
 START=$(date +%s.%N)
@@ -50,7 +50,7 @@ convert -density $DPI -font ./Andika-$FACTOR-$SEED.ttf alphabet.txt alphabet-$FA
 
 #ocr
 #tesseract
-tesseract alphabet-$FACTOR-$DPI-$SEED.png alphabet-$FACTOR-$DPI-$SEED 1>/dev/null 2>&1
+tesseract -psm 6 alphabet-$FACTOR-$DPI-$SEED.png alphabet-$FACTOR-$DPI-$SEED 
 
 #time
 END=$(date +%s.%N)
