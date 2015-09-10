@@ -11,11 +11,11 @@ set yrange [0:100]
 set key bottom left
 
 plot for [IDX=0:5] 'output.csv' i IDX u 6:8    w linespoint ti columnhead, \
-     for [IDX=0:5] ''           i IDX u 6:8:11 w yerrorbars pt 0 ti ''
+     for [IDX=0:5] ''           i IDX u 6:8:10 w yerrorbars pt 0 ti ''
 
 set output 'time_gocr.eps'
 set ylabel "OCR time (s)"
 set key top left
 set yrange [0:10]
-plot for [IDX=0:5] 'output.csv' i IDX u 6:9    w linespoint ti columnhead, \
-     for [IDX=0:5] ''           i IDX u 6:9:13 w yerrorbars pt 0 ti ''
+plot for [IDX=0:5] 'output.csv' i IDX u 6:11    w linespoint ti columnhead, \
+     for [IDX=0:5] ''           i IDX u 6:11:13 w yerrorbars pt 0 ti ''
