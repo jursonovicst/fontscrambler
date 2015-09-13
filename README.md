@@ -7,7 +7,6 @@
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Publications - Howto cite](#publications)
 
 
 
@@ -120,9 +119,3 @@ div {
 \ScrambledFont{P6 XMyFruX UXLBXLtXV}
 \end{document}
 ```
-
-
-
-##Publications
-
-Feel free to use/reuse my scripts under the ____, and I would appreciate, if you 
