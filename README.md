@@ -121,6 +121,6 @@ div {
 ####Other examples
 
  - Microsoft Word: https://github.com/jursonovicst/fontscrambler/blob/master/sample.docx
- - PDF: https://github.com/jursonovicst/fontscrambler/blob/master/sample.docx
+ - PDF: https://github.com/jursonovicst/fontscrambler/blob/master/sample.pdf
 
 
