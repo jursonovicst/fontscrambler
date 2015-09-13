@@ -1,5 +1,7 @@
 # fontscrambler
 
+
+
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -8,9 +10,12 @@
 4. [Publications - Howto cite](#publications)
 
 
+
 ##Overview
 
 This tool was created to demonstrate a simple idea to mitigate mass digital surveillance and big data analytics by altering the character encoding process on such way, which remains compatible with major online and offline formats, but increases the costs of computer analysis by forcing algorithms to process visual information.
+
+
 
 ##Module Description
 
@@ -33,7 +38,9 @@ The scramble script encodes text from the standard input according to the scramb
 
 
 
-####`gocr`, `ocrad`, `tesseract` folders
+####`gocr`, `ocrad`, and `tesseract` folders
+
+Folders to measure the decoding effort of popular OCR softwares. Just run the `runme_ascii` script for a single, specific test, or the `runme` script to run multiple tests with different shaking factors, DPI, and random seeds.
 
 
 
@@ -70,12 +77,13 @@ P6 XMyFruX UXLBXLtXV
 
 Use this text with the scrambled font to display surveilance and analytics safe messages:
 
+
+
 ####HTML example
 
 ```html
 <!DOCTYPE html>
-<html>
-<head>
+<html><head>
 <style> 
 @font-face {
     font-family: myFirstFont;
@@ -84,19 +92,13 @@ Use this text with the scrambled font to display surveilance and analytics safe 
 div {
     font-family: myFirstFont;
 }
-</style>
-</head>
+</style></head>
 <body>
-
-<p>This is a non-scrambled sentence.</p>
-
-<p><div>
-P6 XMyFruX UXLBXLtXV
-</div></p>
-
-</body>
-</html>
+<div>P6 XMyFruX UXLBXLtXV</div>
+</body></html>
 ```
+
+
 
 ####Latex example
 
@@ -114,15 +116,13 @@ P6 XMyFruX UXLBXLtXV
   BoldItalicFont = Andika-0-12345.ttf
 ]{Andika-0-12345.ttf}
 
-
 \begin{document}
-
 \ScrambledFont{P6 XMyFruX UXLBXLtXV}
-
 \end{document}
 ```
 
 
+
 ##Publications
 
-
+Feel free to use/reuse my scripts under the ____, and I would appreciate, if you 
