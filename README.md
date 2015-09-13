@@ -53,7 +53,7 @@ To scramble the `Andika-R.ttf` font (and set the random seed generator to 12345)
 
 This will create the scrabled `Andika-0-12345.ttf` font:
 
-IMG
+![Image of Yaktocat](https://github.com/jursonovicst/fontscrambler/blob/master/doc/Andika-0-12345.jpg)
 
 and the `Andika-0-12345.txt` scrambler table for text encoding:
 
