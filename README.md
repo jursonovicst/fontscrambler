@@ -39,9 +39,42 @@ The scramble script encodes text from the standard input according to the scramb
 
 ##Usage
 
+To scramble the `Andika-R.ttf` font (and set the random seed generator to 12345) use:
+
 ```bash
-generate --SEED 2
+./generate -i Andika-R.ttf --seed 12345
 ```
+
+This will create the scrabled `Andika-0-12345.ttf` font:
+
+IMG
+
+and the `Andika-0-12345.txt` scrambler table for text encoding:
+
+```text
+0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.
+hHcQs9wqC.yYtjXfomTbIuFL5rO3UBnpaM6dDAGxiRJzgW4SP12e0vlZEkN78KV
+```
+
+To encode a text for display with the scrambled `Andika-0-12345.ttf` font, use:
+
+```bash
+echo "My example sentence." |./scramble Andika-0-12345.txt
+```
+
+which creates the following scrambled text:
+
+```text
+P6 XMyFruX UXLBXLtXV
+```
+
+Use this text with the scrambled font to display surveilance and analytics safe messages:
+
+```html
+
+```
+
+
 
 
 ##Publications
