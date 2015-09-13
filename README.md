@@ -108,27 +108,16 @@ P6 XMyFruX UXLBXLtXV
 
 \newfontfamily\ScrambledFont[
   Path = ./,
-  UprightFont = Andika_22,
-  ItalicFont = Andika_22,
-  BoldFont = Andika_22,
-  BoldItalicFont = Andika_22
-]{Andika_22}
-
-\newfontfamily\NormalFont[
-  Path = ./,
-  UprightFont = Andika-R,
-  ItalicFont = Andika-R,
-  BoldFont = Andika-R,
-  BoldItalicFont = Andika-R
-]{Andika-R}
+  UprightFont = Andika-0-12345.ttf,
+  ItalicFont = Andika-0-12345.ttf,
+  BoldFont = Andika-0-12345.ttf,
+  BoldItalicFont = Andika-0-12345.ttf
+]{Andika-0-12345.ttf}
 
 
 \begin{document}
-Try to copy-paste the following sentences to a text editor!
 
-\NormalFont{This is a non-scrambled sentence.}
-
-\ScrambledFont{C6Jz Jz Y zH1Y.8AWk zWj7WjHWD}
+\ScrambledFont{P6 XMyFruX UXLBXLtXV}
 
 \end{document}
 ```
