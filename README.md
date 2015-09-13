@@ -99,7 +99,7 @@ div {
 
 
 
-####Latex example
+####LaTeX example
 
 ```tex
 %!TEX program = xelatex
