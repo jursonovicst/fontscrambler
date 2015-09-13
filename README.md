@@ -27,7 +27,7 @@ The generate script is written in python and uses the FontForge library to manip
 
 
 
-#$##`scramble` script
+####`scramble` script
 
 The scramble script encodes text from the standard input according to the scrambling table specified in the argument.
 
