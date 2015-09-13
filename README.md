@@ -14,7 +14,7 @@ This tool was created to demonstrate a simple idea to mitigate mass digital surv
 
 ##Module Description
 
-###Generate script
+####`generate` script
 
 The generate script is written in python and uses the FontForge library to manipulate typefaces. The following arguments are accepted:
 
@@ -27,13 +27,13 @@ The generate script is written in python and uses the FontForge library to manip
 
 
 
-###Scramble script
+#$##`scramble` script
 
 The scramble script encodes text from the standard input according to the scrambling table specified in the argument.
 
 
 
-###gocr, ocrad, tesseract folders
+####`gocr`, `ocrad`, `tesseract` folders
 
 
 
