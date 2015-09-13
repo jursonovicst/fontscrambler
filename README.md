@@ -100,7 +100,38 @@ P6 XMyFruX UXLBXLtXV
 
 ####Latex example
 
+```tex
+%!TEX program = xelatex
 
+\documentclass{article}[12pt]
+\usepackage{fontspec}
+
+\newfontfamily\ScrambledFont[
+  Path = ./,
+  UprightFont = Andika_22,
+  ItalicFont = Andika_22,
+  BoldFont = Andika_22,
+  BoldItalicFont = Andika_22
+]{Andika_22}
+
+\newfontfamily\NormalFont[
+  Path = ./,
+  UprightFont = Andika-R,
+  ItalicFont = Andika-R,
+  BoldFont = Andika-R,
+  BoldItalicFont = Andika-R
+]{Andika-R}
+
+
+\begin{document}
+Try to copy-paste the following sentences to a text editor!
+
+\NormalFont{This is a non-scrambled sentence.}
+
+\ScrambledFont{C6Jz Jz Y zH1Y.8AWk zWj7WjHWD}
+
+\end{document}
+```
 
 
 ##Publications
