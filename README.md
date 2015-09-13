@@ -70,9 +70,35 @@ P6 XMyFruX UXLBXLtXV
 
 Use this text with the scrambled font to display surveilance and analytics safe messages:
 
-```html
+####HTML example
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+@font-face {
+    font-family: myFirstFont;
+    src: url(https://example.com/Andika-0-12345.ttf);
+}
+div {
+    font-family: myFirstFont;
+}
+</style>
+</head>
+<body>
+
+<p>This is a non-scrambled sentence.</p>
+
+<p><div>
+P6 XMyFruX UXLBXLtXV
+</div></p>
+
+</body>
+</html>
 ```
+
+####Latex example
 
 
 
