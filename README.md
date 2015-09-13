@@ -97,8 +97,6 @@ div {
 </body></html>
 ```
 
-
-
 ####LaTeX example
 
 ```tex
@@ -119,3 +117,10 @@ div {
 \ScrambledFont{P6 XMyFruX UXLBXLtXV}
 \end{document}
 ```
+
+####Other examples
+
+ - Microsoft Word: https://github.com/jursonovicst/fontscrambler/blob/master/sample.docx
+ - PDF: https://github.com/jursonovicst/fontscrambler/blob/master/sample.docx
+
+
