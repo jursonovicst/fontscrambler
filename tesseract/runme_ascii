@@ -1,5 +1,10 @@
 #!/bin/bash
 
+command -v wdiff >/dev/null 2>&1 || { echo "I require wdiff but it's not installed.  Aborting." >&2; exit 1; }
+command -v convert >/dev/null 2>&1 || { echo "I require ImageMagick but it's not installed.  Aborting." >&2; exit 1; }
+command -v tesseract >/dev/null 2>&1 || { echo "I require gocr but it's not installed.  Aborting." >&2; exit 1; }
+
+
 #parameters
 #runme_ascii [FACTOR [DPI [SEED]]]
 if [ $# -eq 1 ]; then
@@ -24,7 +29,7 @@ fi
 #generate font
 ../generate -i ../Andika-R.ttf --no-scramble --seed $SEED --shake $FACTOR --components 2>/dev/null
 if [ ! -f Andika-$FACTOR-$SEED.ttf ]; then
-  echo "Error creating font!"
+  echo "Font \"Andika-$FACTOR-$SEED.ttf\"could not been created!"
   exit -1
 fi
 
@@ -68,4 +73,3 @@ echo -n "$FACTOR,$DPI,$SEED,"
 wdiff -s -1 -2 -3 alphabet.txt alphabet-$FACTOR-$DPI-$SEED.txt |grep alphabet-$FACTOR-$DPI-$SEED.txt |cut -d' ' -f6 |cut -d "%" -f1 |tr -d '\n'
 echo -n ","
 echo "$END - $START" |bc
-

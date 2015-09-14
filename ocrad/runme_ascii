@@ -1,5 +1,10 @@
 #!/bin/bash
 
+command -v wdiff >/dev/null 2>&1 || { echo "I require wdiff but it's not installed.  Aborting." >&2; exit 1; }
+command -v convert >/dev/null 2>&1 || { echo "I require ImageMagick but it's not installed.  Aborting." >&2; exit 1; }
+command -v ocrad >/dev/null 2>&1 || { echo "I require gocr but it's not installed.  Aborting." >&2; exit 1; }
+
+
 #parameters
 #runme_ascii [FACTOR [DPI [SEED]]]
 if [ $# -eq 1 ]; then

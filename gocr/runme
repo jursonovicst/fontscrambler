@@ -1,5 +1,8 @@
 #!/bin/bash
 
+LANGold=$LANG
+LANG="en_US"
+
 OUT="output.csv"
 #test several combination
 rm -f alphabet-*
@@ -14,7 +17,7 @@ for DPI in $(seq 200 100 600); do
   for FACTOR in $(seq 0.01 0.01 0.09); do
     X=""
     for n in {1..20}; do
-      X="#$(./runme_ascii $FACTOR $DPI)
+      X="#$(./runme_ascii $FACTOR $DPI) 
 $X"
     done
     echo "${X::-1}" |tee -a $OUT
@@ -27,6 +30,5 @@ done
 
 
 
-#awk '{n++; sum+=$1; sumsq+=$1*$1}END{print sum/n "," sqrt(sumsq/NR - (sum/NR)**2)}'
 
-
+LANG=$LANGold

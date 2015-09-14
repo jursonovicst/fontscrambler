@@ -1,5 +1,8 @@
 #!/bin/bash
 
+LANGold=$LANG
+LANG="en_US"
+
 OUT="output.csv"
 #test several combination
 rm -f alphabet-*
@@ -26,7 +29,4 @@ $X"
 done
 
 
-
-#awk '{n++; sum+=$1; sumsq+=$1*$1}END{print sum/n "," sqrt(sumsq/NR - (sum/NR)**2)}'
-
-
+LANG=$LANGold
