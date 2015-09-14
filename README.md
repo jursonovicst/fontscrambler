@@ -83,7 +83,7 @@ and the `Andika-0-12345.txt` scrambler table for text encoding:
 hHcQs9wqC.yYtjXfomTbIuFL5rO3UBnpaM6dDAGxiRJzgW4SP12e0vlZEkN78KV
 ```
 
-To encode a text for display with the scrambled `Andika-0-12345.ttf` font, use:
+To encode text for display with the scrambled `Andika-0-12345.ttf` font, use:
 
 ```bash
 echo "My example sentence." |./scramble Andika-0-12345.txt
