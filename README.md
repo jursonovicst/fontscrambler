@@ -5,8 +5,8 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Prerequisites](#prerequisites)
-3. [Module Description](#module-description)
+2. [Module Description](#module-description)
+3. [Prerequisites](#prerequisites)
 4. [Usage](#usage)
 
 
@@ -14,24 +14,6 @@
 ##Overview
 
 This tool was created to demonstrate a simple idea to mitigate mass digital surveillance and big data analytics by altering the character encoding process on such way, which remains compatible with major online and offline formats, but increases the costs of computer analysis by forcing algorithms to process visual information.
-
-
-
-##Prerequisites
-
-The generate script depends on the fontforge python library. There is a known bug in the 20120731 version of fontforge, which may causes the scrambling to hang, therefore please make sure, that you obtained the latest version. This can be done on Ubuntu 15.04 very simply:
-
-```bash
-sudo add-apt-repository ppa:fontforge/fontforge
-sudo apt-get update
-sudo apt-get install fontforge python-fontforge
-```
-
-The OCR scripts require the following packages:
-
-```bash
-sudo apt-get install wdiff imagemagick gocr ocrad tesseract-ocr gnuplot
-```
 
 
 
@@ -59,6 +41,24 @@ The scramble script encodes text from the standard input according to the scramb
 ####`gocr`, `ocrad`, and `tesseract` folders
 
 Folders to measure the decoding effort of popular OCR softwares. Just run the `runme_ascii` script for a single, specific test, or the `runme` script to run multiple tests with different shaking factors, DPI, and random seeds.
+
+
+
+##Prerequisites
+
+The generate script depends on the fontforge python library. There is a known bug in the 20120731 version of fontforge, which may causes the scrambling to hang, therefore please make sure, that you obtained the latest version. This can be done on Ubuntu 15.04 very simply:
+
+```bash
+sudo add-apt-repository ppa:fontforge/fontforge
+sudo apt-get update
+sudo apt-get install fontforge python-fontforge
+```
+
+The OCR scripts require the following packages:
+
+```bash
+sudo apt-get install wdiff imagemagick gocr ocrad tesseract-ocr gnuplot
+```
 
 
 
