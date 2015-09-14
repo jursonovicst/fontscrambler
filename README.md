@@ -66,7 +66,7 @@ You may use your favourite OS, hovewer I tested Ubuntu 14.10 and 15.04.
 
 ##Usage
 
-To scramble the `Andika-R.ttf` font (and set the random seed generator to 12345) use:
+To scramble the `Andika-R.ttf` font (and initialize the random generator with 12345) use:
 
 ```bash
 ./generate -i Andika-R.ttf --seed 12345
