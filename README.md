@@ -46,7 +46,7 @@ Folders to measure the decoding effort of popular OCR softwares. Just run the `r
 
 ##Prerequisites
 
-The generate script depends on the fontforge python library. There is a known bug in the 20120731 version of fontforge, which may causes the scrambling to hang, therefore please make sure, that you obtained the latest version. This can be done on Ubuntu 15.04 very simply:
+The generate script depends on the fontforge python library. There is a known bug in the 20120731 version, which may causes the scrambling to hang, therefore please make sure, that you obtained the latest version. This can be done on Ubuntu 15.04 very simply:
 
 ```bash
 sudo add-apt-repository ppa:fontforge/fontforge
