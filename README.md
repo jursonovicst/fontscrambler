@@ -60,6 +60,8 @@ The OCR scripts require the following packages:
 sudo apt-get install wdiff imagemagick gocr ocrad tesseract-ocr gnuplot
 ```
 
+You may use your favourite OS, hovewer I tested Ubuntu 14.10 and 15.04.
+
 
 
 ##Usage
