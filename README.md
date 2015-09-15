@@ -8,6 +8,7 @@
 2. [Module Description](#module-description)
 3. [Prerequisites](#prerequisites)
 4. [Usage](#usage)
+5. [Publication - Howto cite](#publication)
 
 
 
@@ -145,3 +146,6 @@ div {
  - PDF: https://github.com/jursonovicst/fontscrambler/blob/master/sample.pdf
 
 
+##Publication
+
+This idea is under consideration for publication in the *International Journal of Information Security*, citation  will be updated after acceptance.
