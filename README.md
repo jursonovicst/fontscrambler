@@ -148,4 +148,4 @@ div {
 
 ##Publication
 
-This idea is under consideration for publication in the *International Journal of Information Security*, citation  will be updated after acceptance.
+This idea is under consideration for publication, citation  will be updated after acceptance.
