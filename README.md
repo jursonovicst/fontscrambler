@@ -148,4 +148,6 @@ div {
 
 ##Publication
 
-This idea is under consideration for publication, citation  will be updated after acceptance.
+You find a detailed description and analysis in the following [unpublished paper](http://dx.doi.org/10.13140/RG.2.1.4509.8489):
+
+Jursonovics, T. (2016). Fontscrambler -- an approach for digital privacy. Unpublished paper.
