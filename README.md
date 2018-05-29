@@ -12,15 +12,15 @@
 
 
 
-##Overview
+## Overview
 
 This tool was created to demonstrate a simple idea to mitigate mass digital surveillance and big data analytics by altering the character encoding process on such way, which remains compatible with major online and offline formats, but increases the costs of computer analysis by forcing algorithms to process visual information.
 
 
 
-##Module Description
+## Module Description
 
-####`generate` script
+#### `generate` script
 
 The generate script is written in python and uses the FontForge library to manipulate typefaces. The following arguments are accepted:
 
@@ -33,19 +33,19 @@ The generate script is written in python and uses the FontForge library to manip
 
 
 
-####`scramble` script
+#### `scramble` script
 
 The scramble script encodes text from the standard input according to the scrambling table specified in the argument.
 
 
 
-####`gocr`, `ocrad`, and `tesseract` folders
+#### `gocr`, `ocrad`, and `tesseract` folders
 
 Folders to measure the decoding effort of popular OCR softwares. Just run the `runme_ascii` script for a single, specific test, or the `runme` script to run multiple tests with different shaking factors, DPI, and random seeds.
 
 
 
-##Prerequisites
+## Prerequisites
 
 The generate script depends on the fontforge python library. There is a [known bug](https://github.com/fontforge/fontforge/issues/1710) in the 20120731 version, which may causes the scrambling to hang, therefore please make sure, that you obtain the latest version. This can be done on Ubuntu very simply:
 
@@ -65,7 +65,7 @@ You may use your favourite OS, hovewer I tested Ubuntu 14.10 and 15.04.
 
 
 
-##Usage
+## Usage
 
 To scramble the `Andika-R.ttf` font (and initialize the random generator with 12345) use:
 
@@ -100,7 +100,7 @@ Use this text with the scrambled font to display surveilance and analytics safe 
 
 
 
-####HTML example
+#### HTML example
 
 ```html
 <!DOCTYPE html>
@@ -119,7 +119,7 @@ div {
 </body></html>
 ```
 
-####LaTeX example
+#### LaTeX example
 
 ```tex
 %!TEX program = xelatex
@@ -140,13 +140,13 @@ div {
 \end{document}
 ```
 
-####Other examples
+#### Other examples
 
  - Microsoft Word: https://github.com/jursonovicst/fontscrambler/blob/master/sample.docx
  - PDF: https://github.com/jursonovicst/fontscrambler/blob/master/sample.pdf
 
 
-##Publication
+## Publication
 
 You will find the detailed description and analysis of this methin in the following [unpublished paper](http://dx.doi.org/10.13140/RG.2.1.4509.8489):
 
